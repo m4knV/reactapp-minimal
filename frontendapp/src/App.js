@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import axios from 'axios';
+
 const todoItems = [
   {
     id: 1,
@@ -33,6 +35,14 @@ class App extends Component {
       todoList: todoItems
     };
   }
+
+  getIp = () => {
+    axios.get('http://httpbin.org/ip', {
+     }).then(response => {
+      console.log(response.data);
+    });
+  }
+  
   displayCompleted = status => {
     if (status) {
       return this.setState({ viewCompleted: true });
@@ -83,6 +93,8 @@ class App extends Component {
     ));
   };
   render() {
+    let ip;
+    this.getIp()
     return (
       <main className="content">
         <h1 className="text-white text-uppercase text-center my-4">Todo app</h1>
